@@ -451,3 +451,9 @@ body {
   font-size: 0.9rem;
   color: #555;
 }
+
+#activateWalletBtn:disabled {
+  background: lightgray !important;
+  color: #777 !important;
+  cursor: not-allowed !important;
+}
